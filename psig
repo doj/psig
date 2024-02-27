@@ -4,7 +4,8 @@
 # Print human-readable signal info for specified linux process(es).
 # By default this prints all signal info from /proc/<PID>/status.
 #
-# Author: Erik Weathers
+# original Author: Erik Weathers
+# this version: Dirk Jagdmann <doj@cubic.org> https://github.com/doj/psig
 
 from __future__ import print_function
 import argparse
