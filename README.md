@@ -55,3 +55,8 @@ ps aux | grep processnam[e] | awk '{print $2}' | xargs -I{} ./psig -i -p {}
 [ 31001] Signals Ignored: SIGHUP,SIGINT,SIGQUIT,SIGPIPE,SIGXFSZ
 [ 31001] Signals Caught: SIGBUS,SIGUSR1,SIGSEGV,SIGUSR2,SIGALRM,SIGTERM,SIGVTALRM
 ```
+
+## forked
+
+This repository was forked from https://github.com/erikdw/psig
+and contains additional bug fixes and features from other developers.

@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 #
 # Print human-readable signal info for specified linux process(es).
@@ -115,7 +115,7 @@ def signal_bitmask_to_human_readable(bitmask_string):
 def obtain_signal_info(pid):
     signal_info = collections.OrderedDict()
     with open("/proc/%d/status" % pid) as f:
-        pattern = r"^(?:Sig|ShdPnd).*$"
+        pattern = r"^(?:Sig|ShdPnd|Name).*$"
         for line in re.findall(pattern, f.read(), flags=re.MULTILINE):
             parts = line.split(":", 1)
             if parts:
@@ -140,6 +140,7 @@ def option_enabled(args, key):
     return False
 
 OUTPUT_HEADERS = {
+    'Name':   'Thread Name',
     'SigQ':   'Signals Queued',
     'SigPnd': 'Signals Pending',
     'ShdPnd': 'Signals Pending (Shared)',
@@ -155,7 +156,7 @@ def print_signal_info(args, pid, max_pid_length):
             print(output_fmt % \
                 (pid,
                  OUTPUT_HEADERS[k],
-                 v if k == 'SigQ' else signal_bitmask_to_human_readable(v)))
+                 v if (k == 'SigQ' or k == 'Name') else signal_bitmask_to_human_readable(v)))
 
 # Support hosts with a modified max PID number.
 def get_max_pid_length():
